@@ -1,67 +1,69 @@
 {% extends "data/home.html" %}
 {% block content %}
+{% load static %}
 
 <div class="row">
-    <div class="col"><div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">NICK: {{ data.nickname }} <br>
-        RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
-    </h5>
-    <p class="card-text"></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Wins: {{ data.wins }}</li>
-    <li class="list-group-item">Losses: {{ data.losses }}</li>
-    <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Picsa</a>
-    <a href="#" class="card-link">FASZ</a>
-  </div>
-</div>
-</div>
     <div class="col">
-        <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">NICK: {{ data.nickname }} <br>
-        RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
-    </h5>
-    <p class="card-text"></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Wins: {{ data.wins }}</li>
-    <li class="list-group-item">Losses: {{ data.losses }}</li>
-    <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Picsa</a>
-    <a href="#" class="card-link">FASZ</a>
-  </div>
+        <div class="card" style="width: 16rem;">
+            <img src="{% static data.profileicon %}.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">NICK: {{ data.nickname }} <br>
+                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
+                </h5>
+                <p class="card-text"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Wins: {{ data.wins }}</li>
+                <li class="list-group-item">Losses: {{ data.losses }}</li>
+                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">AAAA</a>
+                <a href="#" class="card-link">BBBB</a>
+            </div>
         </div>
-        </div>
+    </div>
     <div class="col">
-        <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">NICK: {{ data.nickname }} <br>
-        RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
-    </h5>
-    <p class="card-text"></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Wins: {{ data.wins }}</li>
-    <li class="list-group-item">Losses: {{ data.losses }}</li>
-    <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Picsa</a>
-    <a href="#" class="card-link">FASZ</a>
-  </div>
+        <div class="card" style="width: 16rem;">
+            <img src="{% static data.profileicon %}.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">NICK: {{ data.nickname }} <br>
+                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
+                </h5>
+                <p class="card-text"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Wins: {{ data.wins }}</li>
+                <li class="list-group-item">Losses: {{ data.losses }}</li>
+                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">AAAA</a>
+                <a href="#" class="card-link">BBBB</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="width: 16rem;">
+            <img src="{% static data.profileicon %}.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">NICK: {{ data.nickname }} <br>
+                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
+                </h5>
+                <p class="card-text"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Wins: {{ data.wins }}</li>
+                <li class="list-group-item">Losses: {{ data.losses }}</li>
+                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">AAAA</a>
+                <a href="#" class="card-link">BBBB</a>
+            </div>
         </div>
 
-</div>
+    </div>
 </div>
 
 

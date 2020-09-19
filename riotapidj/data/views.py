@@ -23,14 +23,14 @@ def data(request):
         summonerid = r['id']
         accountid = r['accountId']
         #matchid = ''
-        print(summonerid)
+        profileicon = str(r['profileIconId'])
 
         url2 = 'https://' + region + '.api.riotgames.com/lol/league/v4/entries/by-summoner/' + summonerid + '?api_key=' + APIKey
         r = requests.get(url2).json()
 
         winrate = (r[0]['wins'] / (r[0]['wins'] + r[0]['losses'])) * 100
         winrate = float("{:.2f}".format(winrate))
-
+        print(url2)
 
         data = {
             'nickname': r[0]['summonerName'],
@@ -40,6 +40,7 @@ def data(request):
             'wins': r[0]['wins'],
             'losses': r[0]['losses'],
             'winrate': winrate,
+            'profileicon': 'data/' + profileicon,
 
         }
     context = {'data': data}
