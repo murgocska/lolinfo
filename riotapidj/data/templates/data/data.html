@@ -2,20 +2,22 @@
 {% block content %}
 {% load static %}
 
-<div class="row">
+<div class="d-inline-flex p-2">
     <div class="col">
-        <div class="card" style="width: 16rem;">
-            <img src="{% static data.profileicon %}.png" class="card-img-top">
+        <div class="card" style="width: 20rem;">
+            <img src="{% static basicinfo.profileicon %}.png" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">NICK: {{ data.nickname }} <br>
-                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
+                <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
+                    RANK: {{ solo.tier }} {{ solo.rank }}, {{ solo.lp }} LP
                 </h5>
+                <img src="{% static solo.rankicon %}.png" class="card-img-top">
                 <p class="card-text"></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Wins: {{ data.wins }}</li>
-                <li class="list-group-item">Losses: {{ data.losses }}</li>
-                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
+                <li class="list-group-item"><h3>SOLO/DUO</h3></li>
+                <li class="list-group-item">Wins: {{ solo.wins }}</li>
+                <li class="list-group-item">Losses: {{ solo.losses }}</li>
+                <li class="list-group-item">Winrate: {{ solo.winrate }}%</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">AAAA</a>
@@ -24,45 +26,26 @@
         </div>
     </div>
     <div class="col">
-        <div class="card" style="width: 16rem;">
-            <img src="{% static data.profileicon %}.png" class="card-img-top" alt="...">
+        <div class="card" style="width: 20rem;">
+            <img src="{% static basicinfo.profileicon %}.png" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">NICK: {{ data.nickname }} <br>
-                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
+                <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
+                    RANK: {{ flex.tier }} {{ flex.rank }}, {{ flex.lp }} LP
                 </h5>
+                <img src="{% static flex.rankicon %}.png" class="card-img-top">
                 <p class="card-text"></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Wins: {{ data.wins }}</li>
-                <li class="list-group-item">Losses: {{ data.losses }}</li>
-                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
+                <li class="list-group-item"><h3>FLEX</h3></li>
+                <li class="list-group-item">Wins: {{ flex.wins }}</li>
+                <li class="list-group-item">Losses: {{ flex.losses }}</li>
+                <li class="list-group-item">Winrate: {{ flex.winrate }}%</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">AAAA</a>
                 <a href="#" class="card-link">BBBB</a>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="card" style="width: 16rem;">
-            <img src="{% static data.profileicon %}.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">NICK: {{ data.nickname }} <br>
-                    RANK: {{ data.tier }} {{ data.rank }}, {{ data.lp }} LP
-                </h5>
-                <p class="card-text"></p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Wins: {{ data.wins }}</li>
-                <li class="list-group-item">Losses: {{ data.losses }}</li>
-                <li class="list-group-item">Winrate: {{ data.winrate }}%</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">AAAA</a>
-                <a href="#" class="card-link">BBBB</a>
-            </div>
-        </div>
-
     </div>
 </div>
 
