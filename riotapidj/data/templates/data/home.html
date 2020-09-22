@@ -17,8 +17,11 @@
         width: 100%;
         margin: 5% auto 5% auto;
         }
-
-
+        .card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        }
 
     </style>
 </head>
@@ -43,8 +46,10 @@
             <a href="{% url 'home' %}"><h1>LOL Info</h1></a>
             <input class="input" type="text" placeholder="Your nickname" name="nickname" required="required">
             <button class="button is-info" type="submit">Search</button>
-
         </form>
+        {% if nosumms.nosumms is True %}
+
+        {% endif %}
         {% block content %}{% endblock %}
     </div>
 </div>
