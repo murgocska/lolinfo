@@ -156,6 +156,7 @@ def data(request):
         else:
             flex['winrate']=0
 
+
         context={
             'basicinfo': basicinfo,
             'solo': solo,
