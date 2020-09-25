@@ -1,4 +1,5 @@
 import requests
+import json
 from django.shortcuts import render
 
 
@@ -22,9 +23,8 @@ def data(request):
     except:
         return render(request, 'data/nosumms.html')
     else:
-        # accountid = r['accountId']
-        # matchid = ''
-        profileicon=str(r['profileIconId'])
+        accountid=r['accountId']
+        profileicon='profileicons/' + str(r['profileIconId'])
 
         url='https://' + region + '.api.riotgames.com/lol/league/v4/entries/by-summoner/' + summonerid + '?api_key=' + APIKey
         r=requests.get(url).json()
@@ -34,30 +34,32 @@ def data(request):
         rankicon='placeholder'
         solo={
             'tier': 'UNRANKED',
-            'rank': 'UNRANKED',
-            'lp': 'UNRANKED',
+            'rank': '',
+            'lp': 0,
             'wins': 'UNRANKED',
             'losses': 'UNRANKED',
-            'rankicon': 'data/' + rankicon,
+            'rankicon': 'data/rankicons/' + rankicon,
         }
         flex={
             'tier': 'UNRANKED',
-            'rank': 'UNRANKED',
-            'lp': 'UNRANKED',
+            'rank': '',
+            'lp': 0,
             'wins': 'UNRANKED',
             'losses': 'UNRANKED',
-            'rankicon': 'data/' + rankicon,
+            'rankicon': 'data/rankicons/' + rankicon,
         }
 
         if queuelen == 0:
             basicinfo={
                 'nickname': request.GET.get('nickname'),
                 'profileicon': 'data/' + profileicon,
+                'region': region
             }
         else:
             basicinfo={
                 'nickname': r[0]['summonerName'],
                 'profileicon': 'data/' + profileicon,
+                'region': region
             }
         # print(r[0]['queueType'])
         if queuelen == 2:
@@ -71,7 +73,7 @@ def data(request):
                     'lp': r[0]['leaguePoints'],
                     'wins': r[0]['wins'],
                     'losses': r[0]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
             elif r[1]['queueType'] == 'RANKED_SOLO_5x5':
                 print('2. if')
@@ -83,7 +85,7 @@ def data(request):
                     'lp': r[1]['leaguePoints'],
                     'wins': r[1]['wins'],
                     'losses': r[1]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
             else:
                 print('ELSE')
@@ -98,7 +100,7 @@ def data(request):
                     'lp': r[0]['leaguePoints'],
                     'wins': r[0]['wins'],
                     'losses': r[0]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
         else:
             print('ELSESOLO')
@@ -112,7 +114,7 @@ def data(request):
                     'lp': r[0]['leaguePoints'],
                     'wins': r[0]['wins'],
                     'losses': r[0]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
             elif r[1]['queueType'] == 'RANKED_FLEX_SR':
                 rankicon=str(r[1]['tier'])
@@ -123,7 +125,7 @@ def data(request):
                     'lp': r[1]['leaguePoints'],
                     'wins': r[1]['wins'],
                     'losses': r[1]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
             else:
                 print('ELSEflex')
@@ -138,7 +140,7 @@ def data(request):
                     'lp': r[0]['leaguePoints'],
                     'wins': r[0]['wins'],
                     'losses': r[0]['losses'],
-                    'rankicon': 'data/' + rankicon,
+                    'rankicon': 'data/rankicons/' + rankicon,
                 }
         else:
             print('ELSEFLEX')
@@ -156,10 +158,41 @@ def data(request):
         else:
             flex['winrate']=0
 
+        url='https://' + region + '.api.riotgames.com/lol/match/v4/matchlists/by-account/' + accountid + '?api_key=' + APIKey
+        r=requests.get(url).json()
+        matches=[]
+        for x in range(10):
+            matches.append([r['matches'][x]['gameId']])
+            x+=1
+        lastmatch=str(matches[0])
+        lastmatch=lastmatch[1:-1]
+
+        url='https://' + region + '.api.riotgames.com/lol/match/v4/matches/' + lastmatch + '?api_key=' + APIKey
+        r=requests.get(url).json()
+        print(url)
+
+        x=0
+        f=open('championFull.json', "r")
+        allchamp=json.loads(f.read())
+        lastmatch={}
+        for x in range(10):
+            playerid=r['participants'][x]['participantId']
+            playername=r['participantIdentities'][x]['player']['summonerName']
+            champid=r['participants'][playerid - 1]['championId']
+
+            champ=allchamp['keys'][str(champid)]
+            champname=allchamp['data'][champ]['name']
+            champicon=allchamp['data'][champ]['image']['full']
+
+            lastmatch['player' + str(x) + 'name']=playername
+            lastmatch['player' + str(x) + 'champicon']='data/champions/' + champicon
+
+            print(lastmatch)
 
         context={
             'basicinfo': basicinfo,
             'solo': solo,
             'flex': flex,
+            'lastmatch': lastmatch
         }
     return render(request, 'data/data.html', context)

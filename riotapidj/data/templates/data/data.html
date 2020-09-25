@@ -5,7 +5,7 @@
 
 <div class="d-inline-flex p-2">
     <div class="col">
-        <div class="card" style="width: 50%;">
+        <div class="card" style="width: 70%;">
             <img src="{% static basicinfo.profileicon %}.png" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="col">
-        <div class="card" style="width: 50%">
+        <div class="card" style="width: 70%">
             <img src="{% static basicinfo.profileicon %}.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
@@ -43,9 +43,59 @@
                 <li class="list-group-item">Winrate: {{ flex.winrate }}%</li>
             </ul>
             <div class="card-body">
-                <a href="#" class="card-link">AAAA</a>
-                <a href="#" class="card-link">BBBB</a>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1">
+        <div class="col">
+            <h2>Last Match:</h2>
+        </div>
+    <div class="row row-cols-5">
+        <div class="col">
+            <img src="{% static lastmatch.player0champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player0name }}"><h4>{{ lastmatch.player0name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player1champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player1name }}"><h4>{{ lastmatch.player1name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player2champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player2name }}"><h4>{{ lastmatch.player2name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player3champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player3name }}"><h4>{{ lastmatch.player3name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player4champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player4name }}"><h4>{{ lastmatch.player4name }}</h4></a>
+        </div>
+    </div>
+    <br><br>
+    <div class="row row-cols-5">
+        <div class="col">
+            <img src="{% static lastmatch.player5champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player5name }}"><h4>{{ lastmatch.player5name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player6champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player6name }}"><h4>{{ lastmatch.player6name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player7champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player7name }}"><h4>{{ lastmatch.player7name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player8champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player8name }}"><h4>{{ lastmatch.player8name }}</h4></a>
+        </div>
+        <div class="col">
+            <img src="{% static lastmatch.player9champicon %}" height="50px" width="50px">
+            <a href="{% url 'data' %}?region={{ basicinfo.region }}&nickname={{ lastmatch.player9name }}"><h4>{{ lastmatch.player9name }}</h4></a>
         </div>
     </div>
 </div>
