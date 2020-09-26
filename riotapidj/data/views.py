@@ -1,3 +1,4 @@
+import datetime
 import requests
 import json
 from django.shortcuts import render
@@ -64,7 +65,6 @@ def data(request):
         # print(r[0]['queueType'])
         if queuelen == 2:
             if r[0]['queueType'] == 'RANKED_SOLO_5x5':
-                print('1. if')
                 rankicon=str(r[0]['tier'])
                 solo.clear()
                 solo={
@@ -76,7 +76,6 @@ def data(request):
                     'rankicon': 'data/rankicons/' + rankicon,
                 }
             elif r[1]['queueType'] == 'RANKED_SOLO_5x5':
-                print('2. if')
                 rankicon=str(r[1]['tier'])
                 solo.clear()
                 solo={
@@ -91,7 +90,6 @@ def data(request):
                 print('ELSE')
         elif queuelen == 1:
             if r[0]['queueType'] == 'RANKED_SOLO_5x5':
-                print('1. if')
                 rankicon=str(r[0]['tier'])
                 solo.clear()
                 solo={
@@ -131,7 +129,6 @@ def data(request):
                 print('ELSEflex')
         elif queuelen == 1:
             if r[0]['queueType'] == 'RANKED_FLEX_SR':
-                print('1. if')
                 rankicon=str(r[0]['tier'])
                 solo.clear()
                 solo={
@@ -171,10 +168,10 @@ def data(request):
         r=requests.get(url).json()
         print(url)
 
-        x=0
         f=open('championFull.json', "r")
         allchamp=json.loads(f.read())
         lastmatch={}
+        x=0
         for x in range(10):
             playerid=r['participants'][x]['participantId']
             playername=r['participantIdentities'][x]['player']['summonerName']
@@ -187,8 +184,6 @@ def data(request):
             lastmatch['player' + str(x) + 'name']=playername
             lastmatch['player' + str(x) + 'champicon']='data/champions/' + champicon
 
-            print(lastmatch)
-
         context={
             'basicinfo': basicinfo,
             'solo': solo,
@@ -196,3 +191,80 @@ def data(request):
             'lastmatch': lastmatch
         }
     return render(request, 'data/data.html', context)
+
+
+def champions(request):
+    return render(request, 'data/champions.html')
+
+
+def live_game(request):
+    APIKey='RGAPI-cdef08bd-0793-4029-828a-d3bee5855518'
+    summonername=request.GET.get('nickname')
+    region=request.GET.get('region')
+
+    url='https://' + region + '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + summonername + '?api_key=' + APIKey
+    print(url)
+    r=requests.get(url).json()
+
+    try:
+        summonerid=r['id']
+    except:
+        return render(request, 'data/nosumms.html')
+    else:
+        url='https://' + region + '.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' + summonerid + '?api_key=' + APIKey
+        print(url)
+        r=requests.get(url).json()
+
+        f=open('queues.json', "r")
+        data=json.loads(f.read())
+
+        gameinfo = {}
+        queuetype=r['gameQueueConfigId']
+        x=0
+        while True:
+            adat=data[x]['queueId']
+            if adat == queuetype:
+                print('Játszott pálya: ' + data[x]['map'] + data[x]['description'])
+                gameinfo['gamemap'] = data[x]['map']
+                gameinfo['gamemode'] = data[x]['description']
+                break
+            x+=1
+
+        gamestarttime = r['gameStartTime']
+        date = gamestarttime / 1000
+        date = datetime.datetime.fromtimestamp(date)
+        date.strftime('%Y-%m-%d %H:%M:%S')
+        print(date)
+        gameinfo['gamestarttime'] = date.strftime('%Y-%m-%d %H:%M:%S')
+
+
+        #gameinfo['gamestarttime'] = r['gameStartTime']
+
+
+        f=open('championFull.json', "r")
+        allchamp=json.loads(f.read())
+        lastmatch={}
+        x=0
+        for x in range(10):
+            playername=r['participants'][x]['summonerName']
+            champid=r['participants'][x]['championId']
+
+            champ=allchamp['keys'][str(champid)]
+            champname=allchamp['data'][champ]['name']
+            champicon=allchamp['data'][champ]['image']['full']
+
+            lastmatch['player' + str(x) + 'name']=playername
+            lastmatch['player' + str(x) + 'champicon']='data/champions/' + champicon
+
+
+        basicinfo={
+            'region': region,
+            'summonername': summonername,
+        }
+
+    context={
+        'basicinfo': basicinfo,
+        'lastmatch': lastmatch,
+        'gameinfo': gameinfo,
+    }
+    return render(request, 'data/live_game.html', context)

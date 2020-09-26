@@ -2,56 +2,18 @@
 {% block content %}
 {% load static %}
 
+<h1>{{ basicinfo.region }}</h1>
 
-<div class="d-inline-flex p-2">
-    <div class="col">
-        <div class="card" style="width: 70%;">
-            <img src="{% static basicinfo.profileicon %}.png" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
-                    RANK: {{ solo.tier }} {{ solo.rank }}, {{ solo.lp }} LP
-                </h5>
-                <img src="{% static solo.rankicon %}.png" class="card-img-top">
-                <p class="card-text"></p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h3>SOLO/DUO</h3></li>
-                <li class="list-group-item">Wins: {{ solo.wins }}</li>
-                <li class="list-group-item">Losses: {{ solo.losses }}</li>
-                <li class="list-group-item">Winrate: {{ solo.winrate }}%</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">AAAA</a>
-                <a href="#" class="card-link">BBBB</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card" style="width: 70%">
-            <img src="{% static basicinfo.profileicon %}.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">NICK: {{ basicinfo.nickname }} <br>
-                    RANK: {{ flex.tier }} {{ flex.rank }}, {{ flex.lp }} LP
-                </h5>
-                <img src="{% static flex.rankicon %}.png" class="card-img-top">
-                <p class="card-text"></p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h3>FLEX</h3></li>
-                <li class="list-group-item">Wins: {{ flex.wins }}</li>
-                <li class="list-group-item">Losses: {{ flex.losses }}</li>
-                <li class="list-group-item">Winrate: {{ flex.winrate }}%</li>
-            </ul>
-            <div class="card-body">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
+<div class="container" onload="myFunction()">
     <div class="row row-cols-1">
         <div class="col">
-            <h2>Last Match:</h2>
+            <h2>Live Game:</h2>
+        </div>
+        <div class="col">
+            <h2>Game Map: </h2> <h3>{{ gameinfo.gamemap }}</h3>
+            <h2>Game Mode: </h2> <h3>{{ gameinfo.gamemode }}</h3>
+            <h2>Game Start Time: </h2> <h3>{{ gameinfo.gamestarttime }}</h3>
+
         </div>
         <div class="row row-cols-5">
             <div class="col">

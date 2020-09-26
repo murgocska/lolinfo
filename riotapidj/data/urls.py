@@ -19,4 +19,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('data/', views.data, name='data'),
+    path('champions/', views.champions, name='champions'),
+    path('live-game/', views.live_game, name='live-game')
 ]
